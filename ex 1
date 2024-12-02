@@ -14,15 +14,12 @@ void twoSum(int nums[], int size, int target, int result[]) {
 int main() {
     int nums[] = {2, 7, 11, 15};
     int target = 9;
-    int result[2] = {-1, -1}; // Array to store indices
-    
+    int result[2] = {-1, -1};
     twoSum(nums, 4, target, result);
-    
     if (result[0] != -1 && result[1] != -1) {
         printf("Indices: [%d, %d]\n", result[0], result[1]);
     } else {
         printf("No solution found.\n");
     }
-    
     return 0;
 }
