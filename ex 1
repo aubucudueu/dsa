@@ -5,7 +5,7 @@ void twoSum(int nums[], int size, int target, int result[]) {
             if (nums[i] + nums[j] == target) {
                 result[0] = i;
                 result[1] = j;
-                return; // Exit once a solution is found
+                return;
             }
         }
     }
