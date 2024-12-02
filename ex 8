@@ -1,0 +1,56 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+#define MAX_ROWS 100
+#define MAX_COLS 100
+
+// Function to perform DFS on the grid
+void dfs(char grid[MAX_ROWS][MAX_COLS], int i, int j, int m, int n) {
+    // Base case: Check if the current cell is out of bounds or water ('0')
+    if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] == '0') {
+        return;
+    }
+
+    // Mark the current cell as visited by changing '1' to '0'
+    grid[i][j] = '0';
+
+    // Explore the four adjacent cells (up, down, left, right)
+    dfs(grid, i - 1, j, m, n); // Up
+    dfs(grid, i + 1, j, m, n); // Down
+    dfs(grid, i, j - 1, m, n); // Left
+    dfs(grid, i, j + 1, m, n); // Right
+}
+
+// Function to count the number of islands in the grid
+int numIslands(char grid[MAX_ROWS][MAX_COLS], int m, int n) {
+    int count = 0;
+
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            // If we find a '1', we have found an island
+            if (grid[i][j] == '1') {
+                count++;
+                // Perform DFS to mark all connected land cells as visited
+                dfs(grid, i, j, m, n);
+            }
+        }
+    }
+
+    return count;
+}
+
+int main() {
+    char grid[MAX_ROWS][MAX_COLS] = {
+        {'1', '1', '1', '1', '0'},
+        {'1', '1', '0', '1', '0'},
+        {'1', '1', '0', '0', '0'},
+        {'0', '0', '0', '0', '0'}
+    };
+    int m = 4; // Number of rows
+    int n = 5; // Number of columns
+
+    int result = numIslands(grid, m, n);
+    printf("The number of islands is %d.\n", result);
+
+    return 0;
+}
