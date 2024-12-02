@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <string.h>
+
+// Function to check if the brackets are valid
+bool isValid(char* s) {
+    char stack[100];  // Stack to store open brackets
+    int top = -1;     // Stack pointer
+
+    // Traverse the input string
+    for (int i = 0; s[i] != '\0'; i++) {
+        char ch = s[i];
+        
+        // Push open brackets onto the stack
+        if (ch == '(' || ch == '{' || ch == '[') {
+            stack[++top] = ch; // Push onto stack
+        } 
+        // Check closing brackets
+        else {
+            if (top == -1) {
+                // Stack is empty but a closing bracket is found
+                return false;
+            }
+            // Pop from stack and validate
+            char topChar = stack[top--];
+            if ((ch == ')' && topChar != '(') ||
+                (ch == '}' && topChar != '{') ||
+                (ch == ']' && topChar != '[')) {
+                return false;
+            }
+        }
+    }
+
+    // If stack is empty, all brackets matched
+    return top == -1;
+}
+
+int main() {
+    char s[] = "()";
+
+    if (isValid(s)) {
+        printf("true\n");
+    } else {
+        printf("false\n");
+    }
+
+    return 0;
+}
