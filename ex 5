@@ -1,16 +1,12 @@
 #include <stdio.h>
-// Function to swap two elements
 void swap(int* a, int* b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
-
-// Partition function for QuickSort
 int partition(int arr[], int low, int high) {
-    int pivot = arr[high]; // Choose the last element as pivot
-    int i = low - 1;       // Pointer for the smaller element
-
+    int pivot = arr[high];
+    int i = low - 1;
     for (int j = low; j < high; j++) {
         if (arr[j] < pivot) {
             i++;
@@ -18,44 +14,31 @@ int partition(int arr[], int low, int high) {
         }
     }
     swap(&arr[i + 1], &arr[high]);
-    return i + 1; // Return the partition index
+    return i + 1;
 }
-
-// QuickSort function
 void quickSort(int arr[], int low, int high) {
     if (low < high) {
-        int pi = partition(arr, low, high); // Partition index
-
-        // Recursively sort elements before and after partition
+        int pi = partition(arr, low, high);
         quickSort(arr, low, pi - 1);
         quickSort(arr, pi + 1, high);
     }
 }
-
-// Function to sort an array in ascending order
 void sortArray(int nums[], int size) {
     quickSort(nums, 0, size - 1);
 }
-
-// Function to print the array
 void printArray(int arr[], int size) {
     for (int i = 0; i < size; i++) {
         printf("%d ", arr[i]);
     }
     printf("\n");
 }
-
 int main() {
     int nums[] = {5, 2, 9, 1, 5, 6};
     int size = sizeof(nums) / sizeof(nums[0]);
-
     printf("Original array: ");
     printArray(nums, size);
-
     sortArray(nums, size);
-
     printf("Sorted array: ");
     printArray(nums, size);
-
     return 0;
 }
