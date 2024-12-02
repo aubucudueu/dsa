@@ -1,13 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-// Definition for a binary tree node.
 struct TreeNode {
     int val;
     struct TreeNode *left;
     struct TreeNode *right;
 };
-
-// Function to create a new node
 struct TreeNode* createNode(int val) {
     struct TreeNode* newNode = (struct TreeNode*)malloc(sizeof(struct TreeNode));
     newNode->val = val;
@@ -15,32 +12,23 @@ struct TreeNode* createNode(int val) {
     newNode->right = NULL;
     return newNode;
 }
-
-// Helper function for inorder traversal
 void inorderTraversal(struct TreeNode* root) {
     if (root == NULL) {
         return;
     }
-    inorderTraversal(root->left);       // Visit left subtree
-    printf("%d ", root->val);           // Visit current node
-    inorderTraversal(root->right);      // Visit right subtree
+    inorderTraversal(root->left);
+    printf("%d ", root->val);
+    inorderTraversal(root->right);
 }
-
 int main() {
-    // Create the binary tree: [1,null,2,3]
     struct TreeNode* root = createNode(1);
     root->right = createNode(2);
     root->right->left = createNode(3);
-
-    // Perform inorder traversal
     printf("Inorder Traversal: ");
     inorderTraversal(root);
     printf("\n");
-
-    // Free allocated memory (in real programs, consider adding memory cleanup)
     free(root->right->left);
     free(root->right);
     free(root);
-
     return 0;
 }
