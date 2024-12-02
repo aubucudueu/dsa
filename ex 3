@@ -1,0 +1,38 @@
+#include <stdio.h>
+// Function to compute sorted squares of a sorted array
+void sortedSquares(int nums[], int size, int result[]) {
+    // Square each element
+    for (int i = 0; i < size; i++) {
+        result[i] = nums[i] * nums[i];
+    }
+
+    // Sort the squared array using a basic bubble sort (simple for understanding)
+    for (int i = 0; i < size - 1; i++) {
+        for (int j = 0; j < size - i - 1; j++) {
+            if (result[j] > result[j + 1]) {
+                // Swap result[j] and result[j + 1]
+                int temp = result[j];
+                result[j] = result[j + 1];
+                result[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int main() {
+    int nums[] = {-4, -1, 0, 3, 10};
+    int size = sizeof(nums) / sizeof(nums[0]);
+    int result[5]; // Array to store the output (same size as nums)
+
+    // Compute sorted squares
+    sortedSquares(nums, size, result);
+
+    // Print the result
+    printf("Sorted squares: ");
+    for (int i = 0; i < size; i++) {
+        printf("%d ", result[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
